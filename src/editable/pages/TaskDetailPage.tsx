@@ -125,8 +125,9 @@ export function TaskDetailView({ task, post, related, comments = [] }: { task: T
 
 function BackLink({ task }: { task: TaskKey }) {
   const taskConfig = getTaskConfig(task)
+  const href = task === 'mediaDistribution' ? '/search' : taskConfig?.route || '/'
   return (
-    <Link href={taskConfig?.route || '/'} className="inline-flex items-center gap-2 border-b-2 border-current pb-1 text-xs font-black uppercase tracking-[0.16em]">
+    <Link href={href} className="inline-flex items-center gap-2 border-b-2 border-current pb-1 text-xs font-black uppercase tracking-[0.16em]">
       <ArrowLeft className="h-4 w-4" /> Back to {taskConfig?.label || 'posts'}
     </Link>
   )
@@ -136,32 +137,32 @@ function ArticleDetail({ task, post, related, comments }: { task: TaskKey; post:
   const images = getImages(post)
   const published = post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : ''
   return (
-    <section className="bg-[#f7f4ef]">
-      <header className="border-b border-black/20">
+    <section className="bg-[#090a0c] text-white">
+      <header className="premium-grid border-b border-white/10">
         <div className="mx-auto max-w-[1180px] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
           <BackLink task={task} />
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t-4 border-black pt-4 text-[11px] font-black uppercase tracking-[0.16em]">
-            <span className="text-[#c92f2f]">{categoryOf(post, 'News')}</span>
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t-4 border-[#ff6a1c] pt-4 text-[11px] font-black uppercase tracking-[0.16em]">
+            <span className="text-[#ffae56]">{categoryOf(post, 'News')}</span>
             {published ? <time>{published}</time> : null}
           </div>
           <h1 className="editorial-serif mt-6 max-w-6xl text-5xl font-black leading-[0.94] tracking-[-0.055em] sm:text-6xl lg:text-[5.5rem]">{post.title}</h1>
-          {summaryText(post) ? <p className="mt-6 max-w-4xl text-xl font-bold leading-8 text-black/68 sm:text-2xl">{summaryText(post)}</p> : null}
+          {summaryText(post) ? <p className="mt-6 max-w-4xl text-xl font-bold leading-8 text-white/58 sm:text-2xl">{summaryText(post)}</p> : null}
         </div>
       </header>
 
       {images[0] ? (
-        <figure className="mx-auto max-w-[1320px] border-x border-b border-black/15 bg-white">
+        <figure className="mx-auto max-w-[1320px] border-x border-b border-white/10 bg-[#111216]">
           <img src={images[0]} alt="" className="max-h-[760px] w-full object-cover" />
-          <figcaption className="border-t border-black/15 px-4 py-3 text-xs italic text-black/55 sm:px-6">Featured image for {post.title}</figcaption>
+          <figcaption className="border-t border-white/10 px-4 py-3 text-xs italic text-white/45 sm:px-6">Featured image for {post.title}</figcaption>
         </figure>
       ) : null}
 
       <div className="mx-auto grid max-w-[1180px] gap-12 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,760px)_300px] lg:px-8 lg:py-16">
-        <article className="min-w-0 border-t-4 border-black pt-8">
+        <article className="min-w-0 border-t-4 border-white/20 pt-8">
           <BodyContent post={post} />
           <EditableComments slug={post.slug} comments={comments} />
         </article>
-        <div className="border-t-4 border-[#c92f2f] pt-5">
+        <div className="border-t-4 border-[#ff6a1c] pt-5">
           <RelatedPanel task={task} post={post} related={related} />
         </div>
       </div>

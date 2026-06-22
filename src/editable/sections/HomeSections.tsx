@@ -1,210 +1,44 @@
 import Link from 'next/link'
-import { ArrowRight, Search } from 'lucide-react'
+import { ArrowRight, BarChart3, CircleCheck, Globe2, Search, Send, Sparkles } from 'lucide-react'
 import type { SitePost } from '@/lib/site-connector'
 import type { HomeTimeSection } from '@/lib/task-data'
 import type { TaskKey } from '@/lib/site-config'
 import { SITE_CONFIG } from '@/lib/site-config'
-import { pagesContent } from '@/editable/content/pages.content'
-import { editableDesignContract as dc } from '@/editable/layouts/design-contract'
-import { CompactIndexCard, getEditableExcerpt, getEditablePostImage, postHref, RailPostCard } from '@/editable/cards/PostCards'
+import { getEditableCategory, getEditableExcerpt, getEditablePostImage, postHref } from '@/editable/cards/PostCards'
 
-type HomeSectionProps = {
-  primaryTask: TaskKey
-  primaryRoute: string
-  posts: SitePost[]
-  timeSections: HomeTimeSection[]
-}
-
-function taskLabel(task: TaskKey) {
-  return SITE_CONFIG.tasks.find((item) => item.key === task)?.label || task
-}
+type HomeSectionProps = { primaryTask: TaskKey; primaryRoute: string; posts: SitePost[]; timeSections: HomeTimeSection[] }
 
 export function EditableHomeHero({ primaryTask, primaryRoute, posts }: HomeSectionProps) {
   const lead = posts[0]
-  const side = posts.slice(1, 3)
-  const trending = posts.slice(3, 8)
-  const heroTitle = pagesContent.home.hero.title.join(' ') || `${SITE_CONFIG.name}: independent stories, culture, and perspective.`
-
   return (
-    <section className="border-b border-black/20 bg-[var(--slot4-surface-bg)]">
-      <div className={`${dc.shell.section} py-8 sm:py-10`}>
-        {!lead ? (
-          <div className="grid min-h-[520px] items-end bg-black p-8 text-white sm:p-12 lg:grid-cols-[1fr_.55fr]">
-            <div>
-              <p className="text-xs font-black uppercase tracking-[.24em] text-[var(--slot4-accent)]">{pagesContent.home.hero.badge}</p>
-              <h1 className={`${dc.type.heroTitle} mt-5 max-w-5xl`}>{heroTitle}</h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">{pagesContent.home.hero.description}</p>
-              <Link href={primaryRoute} className={`${dc.button.accent} mt-8`}>Open newsroom <ArrowRight className="h-4 w-4" /></Link>
-            </div>
-          </div>
-        ) : (
-          <div className="grid gap-px bg-black/20 lg:grid-cols-[.72fr_1.48fr_.7fr]">
-            <div className="grid gap-px bg-black/20">
-              {side.map((post, index) => (
-                <Link key={post.id} href={postHref(primaryTask, post, primaryRoute)} className="group relative min-h-[270px] overflow-hidden bg-black text-white">
-                  <img src={getEditablePostImage(post)} alt={post.title} className="absolute inset-0 h-full w-full object-cover opacity-65 transition duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_15%,rgba(0,0,0,.9))]" />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="text-[10px] font-black uppercase tracking-[.18em] text-white/65">{index === 0 ? 'Spotlight' : 'Culture desk'}</p>
-                    <h2 className="mt-2 text-2xl font-black leading-[1.02] tracking-[-.045em]">{post.title}</h2>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            <Link href={postHref(primaryTask, lead, primaryRoute)} className="group relative min-h-[541px] overflow-hidden bg-[var(--slot4-accent)] text-white">
-              <img src={getEditablePostImage(lead)} alt={lead.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]" />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.84))]" />
-              <div className="absolute inset-x-0 bottom-0 border-t-8 border-[var(--slot4-accent)] p-6 sm:p-9">
-                <span className="bg-[var(--slot4-accent)] px-3 py-2 text-[10px] font-black uppercase tracking-[.2em]">Lead story</span>
-                <h1 className="mt-5 text-4xl font-black leading-[.94] tracking-[-.06em] sm:text-6xl">{lead.title}</h1>
-                <p className="mt-5 max-w-2xl text-sm leading-7 text-white/82 sm:text-base">{getEditableExcerpt(lead, 180)}</p>
-              </div>
-            </Link>
-
-            <aside className="bg-[var(--slot4-surface-bg)] p-6">
-              <div className="flex items-end justify-between border-b-4 border-black pb-3">
-                <h2 className="text-2xl font-black uppercase tracking-[-.04em]">Trending</h2>
-                <span className="text-[10px] font-black uppercase tracking-[.2em] text-[var(--slot4-accent)]">Now</span>
-              </div>
-              <div className="mt-2">
-                {trending.map((post, index) => <CompactIndexCard key={post.id} post={post} href={postHref(primaryTask, post, primaryRoute)} index={index} />)}
-              </div>
-            </aside>
-          </div>
-        )}
+    <section className="premium-grid relative -mt-[82px] overflow-hidden border-b border-white/8 bg-[#090a0c] px-4 pb-16 pt-40 text-center text-white sm:pb-24 sm:pt-48">
+      <div className="pointer-events-none absolute left-1/2 top-20 h-[420px] w-[760px] -translate-x-1/2 rounded-full bg-[#ff6a1c]/10 blur-[130px]" />
+      <div className="relative mx-auto max-w-[1120px]">
+        <p className="text-[11px] font-black uppercase tracking-[.25em] text-[#ffae56]">Media distribution, made deliberate</p>
+        <h1 className="editorial-serif mx-auto mt-6 max-w-[1060px] text-5xl font-black leading-[.96] tracking-[-.055em] sm:text-7xl lg:text-[5.65rem]">Plan, publish, and amplify stories that deserve attention.</h1>
+        <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-white/58 sm:text-lg">A focused distribution platform for publishing releases, reaching new audiences, and keeping every media story easy to discover.</p>
+        <div className="mt-9 flex flex-wrap justify-center gap-3"><Link href="/search" className="rounded-full bg-[#ff6a1c] px-7 py-4 text-xs font-black uppercase tracking-[.12em] shadow-[0_14px_40px_rgba(255,106,28,.35)] hover:bg-[#ffae56] hover:text-black">Explore releases</Link><Link href="/create" className="rounded-full border border-white/18 bg-white/5 px-7 py-4 text-xs font-black uppercase tracking-[.12em] hover:bg-white hover:text-black">Distribute a story</Link></div>
+        <div className="orange-glow mx-auto mt-14 max-w-[920px] overflow-hidden rounded-[2rem] border border-white/12 bg-[#121318] p-2 text-left shadow-2xl">
+          {lead ? <Link href={postHref(primaryTask, lead, primaryRoute)} className="group grid overflow-hidden rounded-[1.55rem] bg-[#0c0d0f] md:grid-cols-[1.2fr_.8fr]"><div className="relative min-h-[300px] overflow-hidden"><img src={getEditablePostImage(lead)} alt={lead.title} className="absolute inset-0 h-full w-full object-cover opacity-75 transition duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"/><span className="absolute left-5 top-5 rounded-full bg-[#ff6a1c] px-3 py-1.5 text-[10px] font-black uppercase tracking-[.16em]">Featured release</span></div><div className="flex flex-col justify-center p-7 sm:p-9"><p className="text-[10px] font-black uppercase tracking-[.2em] text-[#ffae56]">{getEditableCategory(lead)}</p><h2 className="editorial-serif mt-4 text-3xl font-black leading-[1.03] tracking-[-.04em]">{lead.title}</h2><p className="mt-5 text-sm leading-7 text-white/52">{getEditableExcerpt(lead, 175)}</p><span className="mt-6 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[.14em] text-[#ff6a1c]">Read release <ArrowRight className="h-4 w-4"/></span></div></Link> : <div className="grid min-h-[360px] place-items-center p-8"><div><Sparkles className="mx-auto h-8 w-8 text-[#ff6a1c]"/><h2 className="mt-4 text-2xl font-black">Your next headline starts here.</h2></div></div>}
+        </div>
       </div>
     </section>
   )
 }
 
 export function EditableStoryRail({ primaryTask, primaryRoute, posts }: HomeSectionProps) {
-  const railPosts = posts.slice(5, 13).length ? posts.slice(5, 13) : posts
-  if (!railPosts.length) return null
-  return (
-    <section className="bg-[var(--slot4-page-bg)]">
-      <div className={`${dc.shell.section} ${dc.shell.sectionY}`}>
-        <div className="flex items-end justify-between gap-6 border-b-4 border-black pb-4">
-          <div>
-            <p className="text-[10px] font-black uppercase tracking-[.23em] text-[var(--slot4-accent)]">The daily edit</p>
-            <h2 className="mt-2 text-4xl font-black tracking-[-.055em]">Latest stories</h2>
-          </div>
-          <Link href={primaryRoute} className="hidden text-xs font-black uppercase tracking-[.14em] hover:text-[var(--slot4-accent)] sm:inline-flex">View all <ArrowRight className="ml-2 h-4 w-4" /></Link>
-        </div>
-        <div className={`${dc.layout.rail} mt-6`}>
-          {railPosts.map((post, index) => <RailPostCard key={post.id} post={post} href={postHref(primaryTask, post, primaryRoute)} index={index} />)}
-        </div>
-      </div>
-    </section>
-  )
+  const items = posts.slice(1, 6)
+  return <section className="bg-[#0d0e11] py-20 text-white"><div className="mx-auto max-w-[1120px] px-4 sm:px-6"><div className="grid gap-8 text-center md:grid-cols-3">{[[Globe2,'Expand your reach','Put releases in front of audiences exploring trusted media.'],[BarChart3,'Build lasting visibility','Give every announcement a polished, searchable destination.'],[Send,'Move stories forward','Keep distribution clear from publication through discovery.']].map(([Icon,title,copy]) => { const I=Icon as typeof Globe2; return <div key={String(title)}><div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl border border-white/10 bg-white/5 text-[#ff6a1c]"><I className="h-6 w-6"/></div><h2 className="editorial-serif mt-6 text-2xl font-black">{String(title)}</h2><p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-white/48">{String(copy)}</p></div>})}</div>{items.length ? <div className="mt-20"><div className="flex items-end justify-between border-b border-white/12 pb-5"><div><p className="text-[10px] font-black uppercase tracking-[.22em] text-[#ffae56]">Latest dispatches</p><h2 className="editorial-serif mt-2 text-4xl font-black">Stories in motion</h2></div><Link href="/search" className="hidden text-xs font-black uppercase tracking-[.14em] sm:flex">View all <ArrowRight className="ml-2 h-4 w-4"/></Link></div><div className="mt-6 grid gap-4 lg:grid-cols-[1.45fr_repeat(3,.7fr)]">{items.slice(0,4).map((post,index)=><Link key={post.id||post.slug} href={postHref(primaryTask,post,primaryRoute)} className={`group relative overflow-hidden rounded-2xl bg-[#17181c] ${index===0?'min-h-[360px] lg:row-span-1':'min-h-[280px]'}`}><img src={getEditablePostImage(post)} alt={post.title} className="absolute inset-0 h-full w-full object-cover opacity-55 transition duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-black via-black/15 to-transparent"/><div className="absolute inset-x-0 bottom-0 p-5"><p className="text-[9px] font-black uppercase tracking-[.18em] text-[#ffae56]">{getEditableCategory(post)}</p><h3 className={`${index===0?'text-3xl':'text-lg'} editorial-serif mt-2 font-black leading-tight`}>{post.title}</h3></div></Link>)}</div></div>:null}</div></section>
 }
 
 export function EditableMagazineSplit({ primaryTask, primaryRoute, posts }: HomeSectionProps) {
-  const feature = posts[8] || posts[0]
-  const portraits = posts.slice(9, 14).length ? posts.slice(9, 14) : posts.slice(1, 6)
-  if (!feature) return null
-  return (
-    <section className="bg-[var(--slot4-accent)] text-white">
-      <div className={`${dc.shell.section} py-14 sm:py-20`}>
-        <div className="flex items-end justify-between border-b border-white/50 pb-5">
-          <div>
-            <p className="text-[10px] font-black uppercase tracking-[.24em] text-white/70">Essential reading</p>
-            <h2 className="mt-2 text-4xl font-black tracking-[-.055em] sm:text-5xl">Features</h2>
-          </div>
-          <span className="editorial-serif hidden text-2xl italic sm:block">Stories worth your time.</span>
-        </div>
-        <div className="mt-7 grid gap-5 lg:grid-cols-[1.55fr_.72fr_.72fr_.72fr]">
-          <Link href={postHref(primaryTask, feature, primaryRoute)} className="group relative min-h-[520px] overflow-hidden bg-black lg:row-span-2">
-            <img src={getEditablePostImage(feature)} alt={feature.title} className="absolute inset-0 h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-[1.025]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_20%,rgba(0,0,0,.88))]" />
-            <div className="absolute inset-x-0 bottom-0 p-7">
-              <p className="text-[10px] font-black uppercase tracking-[.2em] text-white/70">Cover feature</p>
-              <h3 className="mt-3 text-4xl font-black leading-[.98] tracking-[-.055em]">{feature.title}</h3>
-            </div>
-          </Link>
-          {portraits.slice(0, 5).map((post) => (
-            <Link key={post.id} href={postHref(primaryTask, post, primaryRoute)} className="group bg-black text-white">
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <img src={getEditablePostImage(post)} alt={post.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(0,0,0,.88))]" />
-                <h3 className="absolute inset-x-0 bottom-0 p-4 text-lg font-black leading-tight tracking-[-.035em]">{post.title}</h3>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
+  const items=posts.slice(5,8).length?posts.slice(5,8):posts.slice(0,3)
+  return <section className="bg-[#f3eee5] py-20 text-[#171719] sm:py-24"><div className="mx-auto max-w-[1120px] px-4 sm:px-6"><div className="text-center"><p className="text-[10px] font-black uppercase tracking-[.22em] text-[#f05d16]">Built for modern distribution</p><h2 className="editorial-serif mx-auto mt-4 max-w-4xl text-4xl font-black tracking-[-.045em] sm:text-6xl">One publishing flow. Many ways to be discovered.</h2><p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-black/55">Create a permanent home for each release while keeping timely coverage easy to browse and share.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3">{items.map((post,index)=><Link key={post.id||post.slug} href={postHref(primaryTask,post,primaryRoute)} className={`group overflow-hidden rounded-[2rem] border border-black/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl ${index===1?'md:translate-y-8':''}`}><div className="aspect-[16/11] overflow-hidden bg-black"><img src={getEditablePostImage(post)} alt={post.title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105"/></div><div className="p-6"><span className="text-[10px] font-black uppercase tracking-[.18em] text-[#f05d16]">0{index+1} / {getEditableCategory(post)}</span><h3 className="editorial-serif mt-3 text-2xl font-black leading-tight">{post.title}</h3><p className="mt-4 line-clamp-3 text-sm leading-6 text-black/55">{getEditableExcerpt(post,150)}</p></div></Link>)}</div></div></section>
 }
 
 export function EditableTimeCollections({ primaryTask, primaryRoute, posts, timeSections }: HomeSectionProps) {
-  const collected = timeSections.flatMap((section) => section.posts)
-  const source = collected.length ? collected : posts.slice(3)
-  const lead = source[0] || posts[0]
-  const briefs = source.slice(1, 7)
-  if (!lead) return null
-  return (
-    <section className="bg-[var(--slot4-surface-bg)]">
-      <div className={`${dc.shell.section} ${dc.shell.sectionY}`}>
-        <div className="grid gap-10 lg:grid-cols-[1.25fr_.75fr]">
-          <div>
-            <div className="border-b-4 border-black pb-4">
-              <p className="text-[10px] font-black uppercase tracking-[.23em] text-[var(--slot4-accent)]">From the newsroom</p>
-              <h2 className="mt-2 text-4xl font-black tracking-[-.055em]">More to discover</h2>
-            </div>
-            <Link href={postHref(primaryTask, lead, primaryRoute)} className="group mt-6 grid border-b border-black/20 pb-7 sm:grid-cols-[1.1fr_.9fr]">
-              <div className="relative min-h-[330px] overflow-hidden bg-[var(--slot4-media-bg)]">
-                <img src={getEditablePostImage(lead)} alt={lead.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-              </div>
-              <div className="bg-black p-7 text-white sm:p-9">
-                <p className="text-[10px] font-black uppercase tracking-[.2em] text-[var(--slot4-accent)]">Editor&apos;s pick</p>
-                <h3 className="mt-4 text-4xl font-black leading-[.98] tracking-[-.055em]">{lead.title}</h3>
-                <p className="mt-5 text-sm leading-7 text-white/70">{getEditableExcerpt(lead, 180)}</p>
-              </div>
-            </Link>
-          </div>
-          <aside>
-            <div className="border-b-4 border-black pb-4">
-              <p className="text-[10px] font-black uppercase tracking-[.23em] text-[var(--slot4-accent)]">Quick reads</p>
-              <h2 className="mt-2 text-4xl font-black tracking-[-.055em]">The briefing</h2>
-            </div>
-            <div className="mt-2">
-              {briefs.map((post, index) => <CompactIndexCard key={post.id} post={post} href={postHref(primaryTask, post, primaryRoute)} index={index} />)}
-            </div>
-          </aside>
-        </div>
-        <form action="/search" className="mt-14 grid border-y-4 border-black bg-[var(--slot4-page-bg)] p-6 sm:grid-cols-[1fr_auto] sm:items-center sm:p-9">
-          <div>
-            <h3 className="text-3xl font-black tracking-[-.05em]">Search the full archive</h3>
-            <p className="mt-2 text-sm text-black/60">Explore every {taskLabel(primaryTask).toLowerCase()} published by {SITE_CONFIG.name}.</p>
-          </div>
-          <label className="mt-5 flex border border-black bg-white sm:mt-0 sm:min-w-[420px]">
-            <Search className="ml-4 mt-4 h-4 w-4" />
-            <input name="q" placeholder="Search stories" className="min-w-0 flex-1 bg-transparent px-3 py-3 text-sm outline-none" />
-            <button className="bg-[var(--slot4-accent)] px-5 text-xs font-black uppercase tracking-[.14em] text-white">Search</button>
-          </label>
-        </form>
-      </div>
-    </section>
-  )
+  const source=timeSections.flatMap(s=>s.posts).length?timeSections.flatMap(s=>s.posts):posts
+  return <section className="bg-[#0b0c0e] py-20 text-white"><div className="mx-auto max-w-[1120px] px-4 sm:px-6"><div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-center"><div><p className="text-[10px] font-black uppercase tracking-[.22em] text-[#ffae56]">From scattered outreach to planned publishing</p><h2 className="editorial-serif mt-4 text-4xl font-black leading-[1.02] tracking-[-.04em] sm:text-5xl">A clearer home for every announcement.</h2><div className="mt-8 grid gap-4">{['Publish with a consistent editorial structure','Organize releases by topic and category','Keep every story accessible and ready to share'].map(item=><p key={item} className="flex items-center gap-3 text-sm text-white/62"><CircleCheck className="h-5 w-5 shrink-0 text-[#ff6a1c]"/>{item}</p>)}</div></div><div className="rounded-[2rem] border border-white/10 bg-[#141519] p-4"><div className="rounded-[1.5rem] border border-white/8 bg-[#0c0d0f] p-6"><div className="flex items-center justify-between border-b border-white/10 pb-4"><span className="text-xs font-black uppercase tracking-[.16em]">Distribution board</span><span className="rounded-full bg-[#ff6a1c]/15 px-3 py-1 text-[10px] font-bold text-[#ffae56]">Live archive</span></div><div className="mt-4 space-y-3">{source.slice(0,4).map((post,index)=><Link key={post.id||post.slug} href={postHref(primaryTask,post,primaryRoute)} className="grid grid-cols-[38px_1fr_auto] items-center gap-3 rounded-xl border border-white/7 bg-white/[.025] p-3 hover:border-[#ff6a1c]/50"><span className="text-lg font-black text-[#ff6a1c]">0{index+1}</span><span className="line-clamp-1 text-sm font-bold">{post.title}</span><ArrowRight className="h-4 w-4 text-white/30"/></Link>)}</div></div></div></div><form action="/search" className="mt-16 grid gap-5 rounded-[2rem] border border-white/10 bg-gradient-to-r from-[#17181c] to-[#21130c] p-7 sm:grid-cols-[1fr_auto] sm:items-center sm:p-9"><div><h3 className="editorial-serif text-3xl font-black">Search the release archive</h3><p className="mt-2 text-sm text-white/48">Find companies, topics, announcements, and media updates.</p></div><label className="flex overflow-hidden rounded-full border border-white/15 bg-black/25 sm:min-w-[390px]"><Search className="ml-4 mt-4 h-4 w-4 text-[#ffae56]"/><input name="q" placeholder="Search releases" className="min-w-0 flex-1 bg-transparent px-3 py-3 text-sm outline-none"/><button className="m-1 rounded-full bg-[#ff6a1c] px-5 text-xs font-black">Search</button></label></form></div></section>
 }
 
-export function EditableHomeCta() {
-  return (
-    <section className="bg-black text-white">
-      <div className={`${dc.shell.section} grid gap-px bg-white/25 lg:grid-cols-2`}>
-        <div className="bg-black px-6 py-14 sm:px-10 lg:py-20">
-          <p className="text-[10px] font-black uppercase tracking-[.24em] text-[var(--slot4-accent)]">Stay informed</p>
-          <h2 className="mt-4 max-w-xl text-5xl font-black leading-[.94] tracking-[-.06em]">The stories shaping what comes next.</h2>
-        </div>
-        <div className="flex flex-col justify-center bg-black px-6 py-14 sm:px-10 lg:py-20">
-          <p className="max-w-xl text-lg leading-8 text-white/65">Fresh releases, media updates, newsroom perspectives, and useful public information in one focused publication.</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/contact" className={dc.button.accent}>Send a tip</Link>
-            <Link href="/signup" className="border border-white px-7 py-3.5 text-xs font-black uppercase tracking-[.12em] hover:bg-white hover:text-black">Join the readership</Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
+export function EditableHomeCta() { return <section className="bg-[#f3eee5] px-4 py-20 text-[#171719]"><div className="mx-auto flex max-w-[1080px] flex-col items-center justify-between gap-7 rounded-[2rem] border border-black/10 bg-white p-8 shadow-xl sm:p-10 lg:flex-row"><div><p className="text-[10px] font-black uppercase tracking-[.2em] text-[#f05d16]">Ready when your story is</p><h2 className="editorial-serif mt-3 text-4xl font-black tracking-[-.04em]">Start planning your next release.</h2><p className="mt-3 text-sm text-black/50">Create an account and give your announcement a polished public home.</p></div><Link href="/signup" className="shrink-0 rounded-full bg-[#ff6a1c] px-8 py-4 text-xs font-black uppercase tracking-[.12em] text-white shadow-[0_12px_30px_rgba(255,106,28,.3)]">Get started</Link></div></section> }
