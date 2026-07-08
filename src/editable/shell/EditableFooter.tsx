@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowUpRight, Mail, MapPin } from 'lucide-react'
+import Image from 'next/image'
+import { ArrowUpRight } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/site-config'
 
 export function EditableFooter() {
@@ -17,9 +18,11 @@ export function EditableFooter() {
       <div className="mx-auto max-w-[1240px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[1.15fr_1.85fr]">
           <div className="rounded-[2rem] border border-white/10 bg-white/[.035] p-7">
-            <Link href="/" className="editorial-brand text-4xl font-black"><span className="text-[#ff6a1c]">24</span>presswire</Link>
+            <Link href="/" className="editorial-brand flex items-center gap-3 text-4xl font-black">
+              <Image src="/favicon.png" alt="24presswire" width={40} height={40} className="h-10 w-10 rounded-full" />
+              <span><span className="text-[#ff6a1c]">24</span>presswire</span>
+            </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-white/52">A clear, focused place to distribute releases and discover the stories shaping companies, markets, and communities.</p>
-            <div className="mt-8 space-y-3 text-xs text-white/55"><p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#ff6a1c]" /> Media distribution, worldwide</p><p className="flex items-center gap-2"><Mail className="h-4 w-4 text-[#ff6a1c]" /> hello@24presswire.com</p></div>
           </div>
           <div className="grid gap-8 sm:grid-cols-3">
             {columns.map(([title, links]) => <div key={title}><h3 className="border-b border-white/10 pb-4 text-xs font-black uppercase tracking-[.18em] text-[#ffae56]">{title}</h3><div className="mt-5 grid gap-4">{links.map(([label, href]) => <Link key={label} href={href} className="group flex items-center justify-between text-sm font-bold text-white/62 hover:text-white">{label}<ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition group-hover:opacity-100" /></Link>)}</div></div>)}
