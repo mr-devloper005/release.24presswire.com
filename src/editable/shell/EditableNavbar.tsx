@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ChevronDown, Menu, Search, X } from 'lucide-react'
 import { useEditableLocalAuthSession } from '@/editable/components/EditableLocalAuthForms'
 
@@ -17,8 +18,9 @@ export function EditableNavbar() {
   return (
     <header className="sticky top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
       <nav className="mx-auto flex min-h-[66px] max-w-[1170px] items-center rounded-full border border-white/10 bg-[#111216]/90 px-4 text-white shadow-[0_18px_60px_rgba(0,0,0,.5)] backdrop-blur-xl sm:px-7">
-        <Link href="/" className="editorial-brand shrink-0 text-xl font-black sm:text-2xl">
-          <span className="text-[#ff6a1c]">24</span>presswire
+        <Link href="/" className="editorial-brand flex shrink-0 items-center gap-2 text-xl font-black sm:text-2xl">
+          <Image src="/favicon.png" alt="24presswire" width={32} height={32} className="h-8 w-8 rounded-full" />
+          <span><span className="text-[#ff6a1c]">24</span>presswire</span>
         </Link>
         <div className="mx-auto hidden items-center gap-8 lg:flex">
           {links.map((item, index) => <Link key={item.label} href={item.href} className="inline-flex items-center gap-1.5 text-[13px] font-bold text-white/72 transition hover:text-[#ffae56]">{item.label}{index !== 1 ? <ChevronDown className="h-3.5 w-3.5" /> : null}</Link>)}
