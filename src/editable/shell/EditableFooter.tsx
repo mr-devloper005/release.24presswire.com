@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Mail, MapPin } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/site-config'
 
 export function EditableFooter() {
@@ -23,6 +23,7 @@ export function EditableFooter() {
               <span><span className="text-[#ff6a1c]">24</span>presswire</span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-white/52">A clear, focused place to distribute releases and discover the stories shaping companies, markets, and communities.</p>
+            <div className="mt-8 space-y-3 text-xs text-white/55"><p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#ff6a1c]" /> Media distribution, worldwide</p><p className="flex items-center gap-2"><Mail className="h-4 w-4 text-[#ff6a1c]" /> hello@24presswire.com</p></div>
           </div>
           <div className="grid gap-8 sm:grid-cols-3">
             {columns.map(([title, links]) => <div key={title}><h3 className="border-b border-white/10 pb-4 text-xs font-black uppercase tracking-[.18em] text-[#ffae56]">{title}</h3><div className="mt-5 grid gap-4">{links.map(([label, href]) => <Link key={label} href={href} className="group flex items-center justify-between text-sm font-bold text-white/62 hover:text-white">{label}<ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition group-hover:opacity-100" /></Link>)}</div></div>)}
